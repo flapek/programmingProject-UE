@@ -21,3 +21,8 @@ If you want to stop container run following command
 ```bash
 docker-compose -f infrastructure/docker-compose
 ```
+
+2. To add a row to the database run following command: (TEMPORARY)
+```
+python services/scrapper/main.py
+```

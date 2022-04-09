@@ -1,4 +1,4 @@
-from services.scrapper.get_info import get_info_one_product
+from get_info import get_info_one_product
 import pymongo
 from datetime import datetime
 
