@@ -13,5 +13,15 @@ services:
     ports:
       - 27017:27017
 
+  rabbitmq:
+    container_name: rabbitmq
+    image: rabbitmq:3.10.0-rc.3-management
+    environment:
+      - RABBITMQ_DEFAULT_USER=root
+      - RABBITMQ_DEFAULT_PASS=root
+    ports:
+    - 5672:5672
+    - 15672:15672
+
 volumes:
   mongo-db:
