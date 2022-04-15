@@ -3,13 +3,9 @@ from fastapi import FastAPI
 from MongoDb import MongoDb
 
 app = FastAPI()
+db = MongoDb(False)
+
 
 @app.get("/")
-def read_root():
-    return MongoDb(False).find_all()
-
-
-@app.get("/next={next}&skip={skip}")
-def read_item(next: int, skip: int):
-    return MongoDb(False).find(next, skip)
-
+def read_item(next: Optional[int] = None, skip: int = 0):
+    return db.find(next, skip)
