@@ -8,6 +8,8 @@ def add_product(url):
     now = datetime.utcnow().replace(microsecond=0).isoformat("T")
     json_body = [{
         "name": product['name'],
+        "gpu": product['gpu'],
+        "image": product['image'],
         "price": [
             {
                 "date": now,

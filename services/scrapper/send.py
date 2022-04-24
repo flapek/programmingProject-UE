@@ -1,19 +1,21 @@
 import pika
 import json
 
-credentials = pika.PlainCredentials('root', 'root')
-connection = pika.BlockingConnection(
-    pika.ConnectionParameters(host='localhost', credentials=credentials))
-channel = connection.channel()
 
-order = {
-    'link': 'google.com'
-}
+def send(link):
+    credentials = pika.PlainCredentials('root', 'root')
+    connection = pika.BlockingConnection(
+        pika.ConnectionParameters(host='localhost', credentials=credentials))
+    channel = connection.channel()
 
-channel.queue_declare(queue='hello')
+    order = {
+        'link': link
+    }
 
-channel.basic_publish(exchange='', routing_key='hello', body=json.dumps(order))
+    channel.queue_declare(queue='hello')
 
-print(" [x] Sent message'")
+    channel.basic_publish(exchange='', routing_key='hello', body=json.dumps(order))
 
-connection.close()
+    print(" [x] Sent message'")
+
+    connection.close()

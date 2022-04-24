@@ -2,7 +2,6 @@ from bs4 import BeautifulSoup
 from urllib.request import Request, urlopen
 from time import sleep
 
-
 base_url = 'https://www.x-kom.pl'
 category_url = '/g-5/c/345-karty-graficzne.html?page=1'
 

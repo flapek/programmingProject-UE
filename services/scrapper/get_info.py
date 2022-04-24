@@ -11,7 +11,6 @@ def get_info_one_product(url):
     for item in product_list:
         price = item.find_all('div', class_="n4n86h-4 eKNYud")[0].text.\
             replace(",", ".").replace(" ", "").replace("zł", "")
-        #product['image'] = item.find_all('span', class_='sc-1tblmgq-0 jiiyfe-2 hEGONW sc-1tblmgq-3 fHoITM')[0].text
         product['price'] = float(price)
         product['name'] = item.find_all('h1', class_="sc-1bker4h-4 hHqGMN")[0].text
     images = soup.find_all('span', class_='sc-1tblmgq-0 jiiyfe-2 hEGONW sc-1tblmgq-3 fHoITM')[0]

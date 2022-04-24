@@ -1,5 +1,6 @@
 import pika, sys, os
 
+
 def main():
     credentials = pika.PlainCredentials('root', 'root')
     connection = pika.BlockingConnection(pika.ConnectionParameters(host='localhost', credentials=credentials))
@@ -14,6 +15,7 @@ def main():
 
     print(' [*] Waiting for messages. To exit press CTRL+C')
     channel.start_consuming()
+
 
 if __name__ == '__main__':
     try:
