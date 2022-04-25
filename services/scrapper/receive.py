@@ -1,10 +1,14 @@
 import pika, sys, os
 from add_product import add_product
 import json
+import configparser
+
+config = configparser.ConfigParser()
+config.read("config.ini")
 
 
 def main():
-    credentials = pika.PlainCredentials('root', 'root')
+    credentials = pika.PlainCredentials(config['rabbit_mq']['username'], config['rabbit_mq']['password'])
     props = {'connection_name': 'link scraping'}
     connection = pika.BlockingConnection(pika.ConnectionParameters(host='localhost',
                                                                    credentials=credentials,

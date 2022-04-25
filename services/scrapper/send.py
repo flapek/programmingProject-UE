@@ -1,9 +1,13 @@
 import pika
 import json
+import configparser
+
+config = configparser.ConfigParser()
+config.read("scrapper/config.ini")
 
 
 def send(link):
-    credentials = pika.PlainCredentials('root', 'root')
+    credentials = pika.PlainCredentials(config['rabbit_mq']['username'], config['rabbit_mq']['password'])
     connection = pika.BlockingConnection(
         pika.ConnectionParameters(host='localhost', credentials=credentials))
     channel = connection.channel()
