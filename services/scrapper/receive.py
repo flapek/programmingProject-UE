@@ -5,7 +5,10 @@ import json
 
 def main():
     credentials = pika.PlainCredentials('root', 'root')
-    connection = pika.BlockingConnection(pika.ConnectionParameters(host='localhost', credentials=credentials))
+    props = {'connection_name': 'link scraping'}
+    connection = pika.BlockingConnection(pika.ConnectionParameters(host='localhost',
+                                                                   credentials=credentials,
+                                                                   client_properties=props))
     channel = connection.channel()
 
     channel.queue_declare(queue='scrapped_links')
