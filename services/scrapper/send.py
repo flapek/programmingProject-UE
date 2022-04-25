@@ -21,6 +21,4 @@ def send(link):
 
     channel.basic_publish(exchange='', routing_key=constants.QUEUE, body=json.dumps(order))
 
-    print(" [x] Sent message'")
-
     connection.close()
