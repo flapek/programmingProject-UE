@@ -23,5 +23,3 @@ def get_prod_url(base_url: str, url: str):
         url = next_btn.get('href') if next_btn else None
         sleep(1)
     return links
-
-get_prod_url(base_url,category_url)
