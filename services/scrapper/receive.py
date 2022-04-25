@@ -1,4 +1,6 @@
 import pika, sys, os
+from add_product import add_product
+import json
 
 
 def main():
@@ -9,8 +11,8 @@ def main():
     channel.queue_declare(queue='hello')
 
     def callback(ch, method, properties, body):
-        print(" [x] Received %r" % body)
-
+        print(" [x] Received %r" % json.loads(body))
+        add_product([str(val) for val in json.loads(body).values()][0])
     channel.basic_consume(queue='hello', on_message_callback=callback, auto_ack=True)
 
     print(' [*] Waiting for messages. To exit press CTRL+C')
