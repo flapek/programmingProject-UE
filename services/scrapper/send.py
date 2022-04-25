@@ -1,6 +1,7 @@
 import pika
 import json
 import configparser
+from services.scrapper import constants
 
 config = configparser.ConfigParser()
 config.read("scrapper/config.ini")
@@ -16,9 +17,9 @@ def send(link):
         'link': link
     }
 
-    channel.queue_declare(queue='scrapped_links')
+    channel.queue_declare(queue=constants.QUEUE)
 
-    channel.basic_publish(exchange='', routing_key='scrapped_links', body=json.dumps(order))
+    channel.basic_publish(exchange='', routing_key=constants.QUEUE, body=json.dumps(order))
 
     print(" [x] Sent message'")
 
