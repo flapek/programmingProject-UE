@@ -12,9 +12,9 @@ def send(link):
         'link': link
     }
 
-    channel.queue_declare(queue='hello')
+    channel.queue_declare(queue='scrapped_links')
 
-    channel.basic_publish(exchange='', routing_key='hello', body=json.dumps(order))
+    channel.basic_publish(exchange='', routing_key='scrapped_links', body=json.dumps(order))
 
     print(" [x] Sent message'")
 
