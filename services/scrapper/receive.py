@@ -10,7 +10,7 @@ config.read("config.ini")
 def main():
     credentials = pika.PlainCredentials(config['rabbit_mq']['username'], config['rabbit_mq']['password'])
     props = {'connection_name': 'link scraping'}
-    connection = pika.BlockingConnection(pika.ConnectionParameters(host='localhost',
+    connection = pika.BlockingConnection(pika.ConnectionParameters(host=config['rabbit_mq']['host'],
                                                                    credentials=credentials,
                                                                    client_properties=props))
     channel = connection.channel()

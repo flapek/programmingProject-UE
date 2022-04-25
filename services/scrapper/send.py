@@ -9,7 +9,7 @@ config.read("scrapper/config.ini")
 def send(link):
     credentials = pika.PlainCredentials(config['rabbit_mq']['username'], config['rabbit_mq']['password'])
     connection = pika.BlockingConnection(
-        pika.ConnectionParameters(host='localhost', credentials=credentials))
+        pika.ConnectionParameters(host=config['rabbit_mq']['host'], credentials=credentials))
     channel = connection.channel()
 
     order = {
