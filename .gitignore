@@ -1,2 +1,4 @@
 .idea
 services/api/.env
+__pycache__/
+*.py[cod]

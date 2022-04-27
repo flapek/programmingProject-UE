@@ -22,7 +22,14 @@ If you want to stop container run following command
 docker-compose -f infrastructure/docker-compose
 ```
 
-2. To add a row to the database run following command: (TEMPORARY)
+2. To turn on the receiver (RabbitMQ server), use the following command:
 ```
-python services/scrapper/main.py
+python services/scrapper/receive.py
 ```
+When enabled, the receiver will be able to receive messages sent by the crawler.
+
+3. To start the crawler with sending messages to the receiver use the following command:
+```
+python services/main.py
+```
+Data is currently being sent to the database.
