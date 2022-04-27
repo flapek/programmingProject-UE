@@ -20,6 +20,8 @@ class MongoDb:
         self.__db = client[os.getenv("MONGO_DB_NAME")]
         self.__col = self.__db[os.getenv("MONGO_COL_NAME")]
         self.__mongo_db = list(self.__col.find())
+        
+        self.__col.create_index([('name', 'text')])
 
     def __count(self):
         return len(self.__mongo_db)
@@ -30,3 +32,6 @@ class MongoDb:
         else:
             correct_end = min(self.__count(), next + skip)
             return json.dumps(self.__mongo_db[skip:correct_end])
+        
+    def search(self, search_text):
+        return self.__col.find({'$text': {"$search": search_text}}).limit(30)
