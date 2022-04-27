@@ -1,19 +1,24 @@
 import pika
 import json
+import configparser
+from services.scrapper import constants
 
-credentials = pika.PlainCredentials('root', 'root')
-connection = pika.BlockingConnection(
-    pika.ConnectionParameters(host='localhost', credentials=credentials))
-channel = connection.channel()
+config = configparser.ConfigParser()
+config.read("scrapper/config.ini")
 
-order = {
-    'link': 'google.com'
-}
 
-channel.queue_declare(queue='hello')
+def send(link):
+    credentials = pika.PlainCredentials(config['rabbit_mq']['username'], config['rabbit_mq']['password'])
+    connection = pika.BlockingConnection(
+        pika.ConnectionParameters(host=config['rabbit_mq']['host'], credentials=credentials))
+    channel = connection.channel()
 
-channel.basic_publish(exchange='', routing_key='hello', body=json.dumps(order))
+    order = {
+        'link': link
+    }
 
-print(" [x] Sent message'")
+    channel.queue_declare(queue=constants.QUEUE)
 
-connection.close()
+    channel.basic_publish(exchange='', routing_key=constants.QUEUE, body=json.dumps(order))
+
+    connection.close()
