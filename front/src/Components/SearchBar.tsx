@@ -10,6 +10,8 @@ function sleep(delay = 0) {
 export default function SearchBar() {
   const [open, setOpen] = React.useState(false);
   const [options, setOptions] = React.useState<{ name: string }[]>([]);
+  // const [value, setValue] = React.useState<string | null>(options[0]);
+  const [inputValue, setInputValue] = React.useState('');
   const loading = open && options.length === 0;
 
   React.useEffect(() => {
@@ -49,11 +51,21 @@ export default function SearchBar() {
       onClose={() => {
         setOpen(false);
       }}
+      // value={value}
+      // onChange={(event, newValue: string | null) => {
+      //   setValue(newValue);
+      // }}
+      inputValue={inputValue}
+      onInputChange={(event, newInputValue) => {
+        setInputValue(newInputValue);
+      }}
       multiple
       autoHighlight
       freeSolo
       isOptionEqualToValue={(option, value) => option.name === value.name}
-      getOptionLabel={(option) => option.name}
+      getOptionLabel={(option) =>
+        typeof option === 'string' ? option : option.name
+      }
       options={options}
       loading={loading}
       renderInput={(params) => (
