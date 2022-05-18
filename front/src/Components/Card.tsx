@@ -7,8 +7,9 @@ import {
   Typography,
 } from '@mui/material';
 import React from 'react';
+import { Info } from '../Types';
 
-export default function Card() {
+export default function Card({ data }: { data: Info }) {
   return (
     <React.Fragment>
       <CardMui sx={{ display: 'flex' }}>
@@ -20,7 +21,7 @@ export default function Card() {
         />
         <CardContent>
           <Typography gutterBottom variant="h5" component="div">
-            Lizard
+            {data.name}
           </Typography>
           <Typography variant="body2" color="text.secondary">
             Lizards are a widespread group of squamate reptiles, with over 6,000

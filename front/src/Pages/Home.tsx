@@ -48,7 +48,7 @@ export default function Home() {
         {elements
           .slice(page * rowsPerPage, (page + 1) * rowsPerPage)
           .map((item, idx) => (
-            <Card key={idx} />
+            <Card key={idx} data={{ name: 'A' }} />
           ))}
       </Box>
       <TablePagination
