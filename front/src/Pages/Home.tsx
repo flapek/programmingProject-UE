@@ -1,13 +1,6 @@
-import { Box, styled, Paper, TablePagination } from '@mui/material';
+import { Box, TablePagination } from '@mui/material';
 import React, { useEffect, useState } from 'react';
-
-const Item = styled(Paper)(({ theme }) => ({
-  ...theme.typography.body2,
-  textAlign: 'center',
-  height: 60,
-  lineHeight: '60px',
-  width: '100%',
-}));
+import { Card } from '../Components';
 
 export default function Home() {
   const [elements, setElements] = useState<number[]>([]);
@@ -55,9 +48,7 @@ export default function Home() {
         {elements
           .slice(page * rowsPerPage, (page + 1) * rowsPerPage)
           .map((item, idx) => (
-            <Item key={idx} elevation={4}>
-              {`idx=${item}`}
-            </Item>
+            <Card key={idx} />
           ))}
       </Box>
       <TablePagination
