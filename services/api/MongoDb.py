@@ -10,8 +10,8 @@ class MongoDb:
         if is_localhost:
             client = pymongo.MongoClient(
                 "mongodb://localhost:27017/",
-                username=os.getenv("LH_USERNAME"),
-                password=os.getenv("LH_PASSWORD"),
+                username=os.getenv("MONGO_USERNAME"),
+                password=os.getenv("MONGO_PASSWORD"),
             )
         else:
             url = f'mongodb+srv://{os.getenv("MONGO_USERNAME")}:{os.getenv("MONGO_PASSWORD")}@cluster0.skowb.mongodb.net/{os.getenv("MONGODB_DB_NAME")}?retryWrites=true&w=majority'
@@ -23,15 +23,23 @@ class MongoDb:
         
         self.__col.create_index([('name', 'text')])
 
-    def __count(self):
-        return len(self.__mongo_db)
+    def find(self, next, skip, search_text):
+        for element in self.__mongo_db:
+            element["_id"] = str(element["_id"])
 
-    def find(self, next, skip):
         if next is None:
             return json.dumps(self.__mongo_db)
+        
+        if search_text is not None:
+            mongo_list = [x for x in self.__mongo_db if x in search_text]
         else:
-            correct_end = min(self.__count(), next + skip)
-            return json.dumps(self.__mongo_db[skip:correct_end])
+            mongo_list = self.__mongo_db
+    
+        correct_end = min(len(mongo_list), next + skip)
+        return json.dumps(mongo_list[skip:correct_end])
         
     def search(self, search_text):
-        return self.__col.find({'$text': {"$search": search_text}}).limit(30)
+        return [x['name'] for x in self.__mongo_db if search_text is x['name'][:len(search_text)]]
+    
+    def add(self, data):
+        self.__col.insert_one(data)
