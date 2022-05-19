@@ -5,6 +5,8 @@
 - [docker and docker-compose](https://docs.docker.com/get-docker/)
 - [node](https://nodejs.org/en/)
 - [yarn](https://yarnpkg.com/)
+- [beautifulsoup4](https://pypi.org/project/beautifulsoup4/)
+- [cloudscraper](https://pypi.org/project/cloudscraper/)
 
 ## Start
 
@@ -33,3 +35,7 @@ When enabled, the receiver will be able to receive messages sent by the crawler.
 python services/main.py
 ```
 Data is currently being sent to the database.
+
+# Performing unit tests
+
+Run test.py file in services/scrapper

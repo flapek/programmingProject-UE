@@ -1,5 +1,6 @@
 from scrapper.send import send
-from crawler.main import get_prod_url
+from crawler.get_url import get_prod_url
+import scrapper.get_info
 import configparser
 
 
