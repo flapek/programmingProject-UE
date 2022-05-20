@@ -1,5 +1,6 @@
 import { Autocomplete, CircularProgress, TextField } from '@mui/material';
 import React from 'react';
+import mockedProducts from '../Data/mockedProducts';
 
 function sleep(delay = 0) {
   return new Promise((resolve) => {
@@ -25,7 +26,11 @@ export default function SearchBar() {
       await sleep(1e3);
 
       if (active) {
-        setOptions([...products]);
+        setOptions(
+          mockedProducts.map((product) => ({
+            name: product.Name,
+          })),
+        );
       }
     })();
 

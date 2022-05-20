@@ -1,14 +1,16 @@
 import { Box, TablePagination } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import { Card } from '../Components';
+import mockedProducts from '../Data/mockedProducts';
+import { Product } from '../Types';
 
 export default function Home() {
-  const [elements, setElements] = useState<number[]>([]);
+  const [elements, setElements] = useState<Product[]>([]);
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
   useEffect(() => {
-    setElements([...Array(20).keys()]);
+    setElements(mockedProducts);
   }, []);
 
   const handleChangePage = (
@@ -48,7 +50,7 @@ export default function Home() {
         {elements
           .slice(page * rowsPerPage, (page + 1) * rowsPerPage)
           .map((item, idx) => (
-            <Card key={idx} data={{ name: 'A' }} />
+            <Card key={idx} product={item} />
           ))}
       </Box>
       <TablePagination

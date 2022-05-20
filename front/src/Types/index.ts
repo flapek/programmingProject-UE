@@ -1,3 +1,4 @@
-import Info from './Info';
+import Product from './Product';
+import Price from './Price';
 
-export type { Info };
+export type { Product, Price };
