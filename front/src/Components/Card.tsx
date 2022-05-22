@@ -11,7 +11,13 @@ import React from 'react';
 import { Chart } from '.';
 import { Product } from '../Types';
 
-export default function Card({ product }: { product: Product }) {
+export default function Card({
+  product,
+  handleClickOpen,
+}: {
+  product: Product;
+  handleClickOpen: () => void;
+}) {
   const price = `Price: ${product.Prices.at(-1)
     ?.Value.toString()
     .replace('.', ',')} PLN`;
@@ -26,7 +32,11 @@ export default function Card({ product }: { product: Product }) {
 
   return (
     <React.Fragment>
-      <Button component={CardMui} sx={{ display: 'flex' }}>
+      <Button
+        component={CardMui}
+        sx={{ display: 'flex' }}
+        onClick={handleClickOpen}
+      >
         <CardMedia
           component="img"
           alt="green iguana"

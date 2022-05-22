@@ -12,7 +12,6 @@ export default function ScrollDialog({
   handleClose,
 }: {
   open: boolean;
-  handleClickOpen: () => void;
   handleClose: () => void;
 }) {
   const theme = useTheme();
