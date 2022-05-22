@@ -8,59 +8,13 @@ import {
   Grid,
 } from '@mui/material';
 import React from 'react';
+import { Chart } from '.';
 import { Product } from '../Types';
-import { Line } from 'react-chartjs-2';
-import {
-  Chart as ChartJS,
-  CategoryScale,
-  LinearScale,
-  PointElement,
-  LineElement,
-  Title,
-  Tooltip,
-  Legend,
-} from 'chart.js';
-
-ChartJS.register(
-  CategoryScale,
-  LinearScale,
-  PointElement,
-  LineElement,
-  Title,
-  Tooltip,
-  Legend,
-);
-
-const options = {
-  responsive: true,
-  plugins: {
-    legend: {
-      display: false,
-    },
-    title: {
-      display: false,
-    },
-  },
-};
 
 export default function Card({ product }: { product: Product }) {
   const price = `Price: ${product.Prices.at(-1)
     ?.Value.toString()
     .replace('.', ',')} PLN`;
-
-  const labels = product.Prices.map((price) =>
-    price.Data.getUTCDate().toString(),
-  );
-  const data = {
-    labels,
-    datasets: [
-      {
-        data: product.Prices.map((price) => price.Value),
-        borderColor: 'rgb(255, 99, 132)',
-        backgroundColor: 'rgba(255, 99, 132, 0.5)',
-      },
-    ],
-  };
 
   const specification = () => {
     return product.Specification.forEach((value, key) => (
@@ -106,7 +60,7 @@ export default function Card({ product }: { product: Product }) {
           {/* <Grid container>{specification()}</Grid> */}
         </CardContent>
         <CardActions>
-          <Line options={options} data={data} />
+          <Chart prices={product.Prices} />
         </CardActions>
       </Button>
     </React.Fragment>
