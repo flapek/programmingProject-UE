@@ -16,7 +16,7 @@ export default function Card({
   handleClickOpen,
 }: {
   product: Product;
-  handleClickOpen: () => void;
+  handleClickOpen: (product: Product) => void;
 }) {
   const price = `Price: ${product.Prices.at(-1)
     ?.Value.toString()
@@ -35,7 +35,7 @@ export default function Card({
       <Button
         component={CardMui}
         sx={{ display: 'flex' }}
-        onClick={handleClickOpen}
+        onClick={() => handleClickOpen(product)}
       >
         <CardMedia
           component="img"

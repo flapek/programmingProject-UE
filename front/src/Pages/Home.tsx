@@ -5,13 +5,14 @@ import mockedProducts from '../Data/mockedProducts';
 import { Product } from '../Types';
 
 export default function Home() {
-  const [elements, setElements] = useState<Product[]>([]);
+  const [products, setProducts] = useState<Product[]>([]);
+  const [product, setProduct] = useState<Product>(products[0]);
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
   const [open, setOpen] = React.useState(false);
 
   useEffect(() => {
-    setElements(mockedProducts);
+    setProducts(mockedProducts);
   }, []);
 
   const handleChangePage = (
@@ -28,8 +29,9 @@ export default function Home() {
     setPage(0);
   };
 
-  const handleClickOpen = () => {
+  const handleClickOpen = (product: Product) => {
     setOpen(true);
+    setProduct(product);
   };
 
   const handleClose = () => {
@@ -46,7 +48,7 @@ export default function Home() {
       </Container>
       <TablePagination
         component="div"
-        count={elements.length}
+        count={products.length}
         page={page}
         onPageChange={handleChangePage}
         rowsPerPage={rowsPerPage}
@@ -62,7 +64,7 @@ export default function Home() {
           gap: 2,
         }}
       >
-        {elements
+        {products
           .slice(page * rowsPerPage, (page + 1) * rowsPerPage)
           .map((item, idx) => (
             <Card key={idx} product={item} handleClickOpen={handleClickOpen} />
@@ -70,13 +72,13 @@ export default function Home() {
       </Box>
       <TablePagination
         component="div"
-        count={elements.length}
+        count={products.length}
         page={page}
         onPageChange={handleChangePage}
         rowsPerPage={rowsPerPage}
         onRowsPerPageChange={handleChangeRowsPerPage}
       />
-      <InfoDialog open={open} handleClose={handleClose} />
+      <InfoDialog open={open} handleClose={handleClose} product={product} />
     </React.Fragment>
   );
 }
