@@ -47,5 +47,11 @@ def add_product(url):
     # mydb = myclient["mydatabase"]
     mycol = mydb[config['db']['db_name']]
     # mycol = mydb['products']
-    mycol.insert_one(json_body[0])
+    if mycol.find_one({"name": product['name']}) is not None:
+        l1 = mycol.find_one({"name": product['name']})['price']
+        l2 = {'date': now, 'value': product['price']}
+        l1.append(l2)
+        mycol.update_one({'name': product['name']}, {"$set": {'price': l1}})
+    else:
+        mycol.insert_one(json_body[0])
     return 'Done'

@@ -4,7 +4,7 @@ from datetime import datetime
 
 
 def add_product(base_url: str, url: str):
-    links = get_prod_url(base_url,url)
+    links = get_prod_url(base_url, url)
     now = datetime.utcnow().replace(microsecond=0).isoformat("T")
     for link in links:
         json_body = [{
