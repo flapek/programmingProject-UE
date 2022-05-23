@@ -18,8 +18,26 @@ def add_product(url):
             {
                 "date": now,
                 "value": product['price']
-            }
-        ]
+            }],
+        'ray_tracing': product['ray_tracing'],
+        'type_of_connector': product['type_of_connector'],
+        'memory': product['memory'],
+        'type_of_memory': product['type_of_memory'],
+        'effective_memory_timing': product['effective_memory_timing'],
+        'core_clock': product['core_clock'],
+        'CUDA_cores': product['CUDA_cores'],
+        'cooling_type': product['cooling_type'],
+        'types_of_outputs': product['types_of_outputs'],
+        'supported_libraries': product['supported_libraries'],
+        'power_supply_connector': product['power_supply_connector'],
+        'recommended_power_supply': product['recommended_power_supply'],
+        'power_consumption': product['power_consumption'],
+        'length': product['length'],
+        'width': product['width'],
+        'height': product['height'],
+        'warranty': product['warranty'],
+        'manufacturer_code': product['manufacturer_code'],
+        'x-kom_code': product['x-kom_code']
     }]
     myclient = pymongo.MongoClient(config['db']['address'],
                                    username=config['db']['username'],
@@ -29,5 +47,11 @@ def add_product(url):
     # mydb = myclient["mydatabase"]
     mycol = mydb[config['db']['db_name']]
     # mycol = mydb['products']
-    mycol.insert_one(json_body[0])
+    if mycol.find_one({"name": product['name']}) is not None:
+        l1 = mycol.find_one({"name": product['name']})['price']
+        l2 = {'date': now, 'value': product['price']}
+        l1.append(l2)
+        mycol.update_one({'name': product['name']}, {"$set": {'price': l1}})
+    else:
+        mycol.insert_one(json_body[0])
     return 'Done'
