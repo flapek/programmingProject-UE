@@ -1,4 +1,6 @@
-.idea
+/**/.idea
 services/api/.env
-__pycache__/
-*.py[cod]
+/**/__pycache__/
+/**/*.py[cod]
+.vscode
+/**/env
