@@ -1,3 +1,3 @@
-MONGO_URL = "mongodb://root:examplePassword@localhost:27017/"
+MONGO_URL = "MONGO_URL"
 MONGODB_DB_NAME = "MONGODB_DB_NAME"
 MONGO_COL_NAME = "MONGO_COL_NAME"
