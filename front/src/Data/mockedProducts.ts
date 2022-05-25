@@ -3,7 +3,7 @@ import { faker } from '@faker-js/faker';
 
 const mockedProducts: Product[] = [...new Array(50)].map(() => ({
   Name: faker.commerce.productName(),
-  Prices: [...new Array(100)].map(() => ({
+  Prices: [...new Array(60)].map(() => ({
     Value: faker.commerce.price(
       faker.datatype.number({ min: 20, max: 80 }),
       faker.datatype.number({ min: 80, max: 180 }),

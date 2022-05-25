@@ -10,6 +10,7 @@ import {
   Tooltip,
   Legend,
 } from 'chart.js';
+import zoomPlugin from 'chartjs-plugin-zoom';
 import { Price } from '../Types';
 
 ChartJS.register(
@@ -20,6 +21,7 @@ ChartJS.register(
   Title,
   Tooltip,
   Legend,
+  zoomPlugin,
 );
 
 const options = {
@@ -31,6 +33,17 @@ const options = {
     title: {
       display: false,
     },
+    // zoom: {
+    //   zoom: {
+    //     wheel: {
+    //       enabled: true,
+    //     },
+    //     pinch: {
+    //       enabled: true,
+    //     },
+    //     mode: 'xy',
+    //   },
+    // },
   },
 };
 
