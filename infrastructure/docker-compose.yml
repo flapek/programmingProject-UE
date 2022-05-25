@@ -4,7 +4,7 @@ services:
   mongo:
     container_name: mongo
     image: mongo
-    restart: always
+    restart: unless-stopped
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: example
@@ -12,16 +12,40 @@ services:
       - mongo-db:/data/db
     ports:
       - 27017:27017
+    networks:
+      - ue
 
   rabbitmq:
     container_name: rabbitmq
     image: rabbitmq:3.10.0-rc.3-management
+    restart: unless-stopped
     environment:
       - RABBITMQ_DEFAULT_USER=root
       - RABBITMQ_DEFAULT_PASS=root
     ports:
     - 5672:5672
     - 15672:15672
+    networks:
+      - ue
+
+  api:
+    container_name: py-api
+    build: ../services/api
+    restart: unless-stopped
+    environment: 
+      - MONGO_URL = "mongodb://root:example@127.0.0.1:27017/"
+      - MONGODB_DB_NAME = "UEDB"
+    ports:
+      - 9000:80 
+    depends_on:
+      - mongo
+    networks:
+      - ue
+
 
 volumes:
   mongo-db:
+
+networks:
+  ue:
+    name: ue-network
