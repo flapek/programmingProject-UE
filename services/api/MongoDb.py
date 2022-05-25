@@ -13,7 +13,7 @@ class MongoDb:
         client = pymongo.MongoClient(str(os.getenv(MONGO_URL)))
 
         self.__db = client[str(os.getenv(MONGODB_DB_NAME))]
-        self.__col = self.__db[str(os.getenv(MONGO_COL_NAME))]
+        self.__col = self.__db[MONGO_COL_NAME]
         # self.__col.create_index([('name', 'text')])
 
     def find(self, next, skip, search_text):
