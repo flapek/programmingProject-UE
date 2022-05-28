@@ -49,7 +49,8 @@ services:
     build: ../services/crawler
     restart: unless-stopped
     environment:
-      - ???
+      - MONGO_URL = mongodb://root:example@127.0.0.1:27017/
+      - MONGO_DB_NAME = UEDB
     networks:
       - ue
     depends_on:
@@ -67,7 +68,7 @@ services:
       - RABBITMQ_USERNAME = root
       - RABBITMQ_PASSWORD = root
       - MONGO_URL = mongodb://root:example@127.0.0.1:27017/
-      - MONGO_DB_NAME = products
+      - MONGO_DB_NAME = UEDB
     networks:
       - ue
     depends_on:
