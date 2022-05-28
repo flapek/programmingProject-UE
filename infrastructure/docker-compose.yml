@@ -61,8 +61,8 @@ services:
     build: ../services/scrapper
     restart: unless-stopped
     environment:
-      - CRAWLER_BASE_URL = https://www.x-kom.pl
-      - CRAWLER_CATEGORY_URL = /g-5/c/345-karty-graficzne.html?page=1
+      - SCRAPPER_BASE_URL = https://www.x-kom.pl
+      - SCRAPPER_CATEGORY_URL = /g-5/c/345-karty-graficzne.html?page=1
       - RABBITMQ_HOST = localhost
       - RABBITMQ_USERNAME = root
       - RABBITMQ_PASSWORD = root
