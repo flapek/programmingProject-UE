@@ -1,11 +1,7 @@
 import pymongo
 import os
 import json
-from dotenv import load_dotenv
 from const import MONGO_COL_NAME, MONGO_URL, MONGO_DB_NAME
-
-
-load_dotenv()
 
 
 class MongoDb:
