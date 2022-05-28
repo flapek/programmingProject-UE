@@ -10,7 +10,6 @@ class MongoDb:
 
         self.__db = client[str(os.getenv(MONGO_DB_NAME))]
         self.__col = self.__db[MONGO_COL_NAME]
-        # self.__col.create_index([('name', 'text')])
 
     def find(self, next, skip, search_text):
         mongo_db = list(self.__col.find())
