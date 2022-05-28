@@ -2,7 +2,7 @@ import pymongo
 import os
 import json
 from dotenv import load_dotenv
-from const import MONGO_COL_NAME, MONGO_URL, MONGODB_DB_NAME
+from const import MONGO_COL_NAME, MONGO_URL, MONGO_DB_NAME
 
 
 load_dotenv()
@@ -12,7 +12,7 @@ class MongoDb:
     def __init__(self):
         client = pymongo.MongoClient(str(os.getenv(MONGO_URL)))
 
-        self.__db = client[str(os.getenv(MONGODB_DB_NAME))]
+        self.__db = client[str(os.getenv(MONGO_DB_NAME))]
         self.__col = self.__db[MONGO_COL_NAME]
         # self.__col.create_index([('name', 'text')])
 
