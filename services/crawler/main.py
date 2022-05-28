@@ -6,9 +6,8 @@ from helpers import add_product
 
 load_dotenv()
 
-db = MongoDb()
-base_url = str(os.getenv(CRAWLER_BASE_URL))
-category_url = str(os.getenv(CRAWLER_CATEGORY_URL))
-
-
-add_product(base_url, category_url)
+add_product(
+    MongoDb(),
+    str(os.getenv(CRAWLER_BASE_URL)),
+    str(os.getenv(CRAWLER_CATEGORY_URL)),
+)
