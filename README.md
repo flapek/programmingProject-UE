@@ -25,15 +25,19 @@ docker-compose -f infrastructure/docker-compose
 ```
 
 2. To turn on the receiver (RabbitMQ server), use the following command:
+
 ```
 python services/scrapper/receive.py
 ```
+
 When enabled, the receiver will be able to receive messages sent by the crawler.
 
 3. To start the crawler with sending messages to the receiver use the following command:
+
 ```
 python services/main.py
 ```
+
 Data is currently being sent to the database.
 
 # Performing unit tests
