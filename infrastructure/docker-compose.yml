@@ -33,16 +33,47 @@ services:
     build: ../services/api
     restart: unless-stopped
     environment: 
-      - MONGO_URL = "mongodb://root:example@127.0.0.1:27017/"
-      - MONGODB_DB_NAME = "UEDB"
+      - MONGO_URL = mongodb://root:example@127.0.0.1:27017/
+      - MONGO_DB_NAME = UEDB
     ports:
       - 9000:80 
     depends_on:
       - mongo
+      - crawler
+      - scrapper
     networks:
       - ue
 
+  crawler:
+    container_name: py-crawler
+    build: ../services/crawler
+    restart: unless-stopped
+    environment:
+      - ???
+    networks:
+      - ue
+    depends_on:
+      - mongo
+      - rabbitmq
 
+  scrapper:
+    container_name: py-scrapper
+    build: ../services/scrapper
+    restart: unless-stopped
+    environment:
+      - CRAWLER_BASE_URL = https://www.x-kom.pl
+      - CRAWLER_CATEGORY_URL = /g-5/c/345-karty-graficzne.html?page=1
+      - RABBITMQ_HOST = localhost
+      - RABBITMQ_USERNAME = root
+      - RABBITMQ_PASSWORD = root
+      - MONGO_URL = mongodb://root:example@127.0.0.1:27017/
+      - MONGO_DB_NAME = products
+    networks:
+      - ue
+    depends_on:
+      - mongo
+      - rabbitmq
+      
 volumes:
   mongo-db:
 
