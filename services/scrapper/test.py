@@ -1,12 +1,15 @@
-import unittest, cloudscraper
+import unittest, cloudscraper, os
 from bs4 import BeautifulSoup
-import configparser
 from helpers import get_prod_url
+from dotenv import load_dotenv
+from const import (
+    SCRAPPER_BASE_URL,
+    SCRAPPER_CATEGORY_URL,
+)
 
-config = configparser.ConfigParser()
-config.read("config.ini")
+load_dotenv()
 
-url = config["url"]["base_url"] + config["url"]["category_url"]
+url = str(os.getenv(SCRAPPER_BASE_URL)) + str(os.getenv(SCRAPPER_CATEGORY_URL))
 scraper = cloudscraper.create_scraper()
 response = scraper.get(url)
 open("testing_site.html", "wb").write(response.content)
