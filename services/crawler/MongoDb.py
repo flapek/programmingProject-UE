@@ -12,13 +12,7 @@ class MongoDb:
         self.__col = self.__db[MONGO_COL_NAME]
 
     def add(self, date_now: str, link: str):
-        json_body = [{
-            "links": [
-            {
-                "date": date_now,
-                "url": link
-            }]
-        }]
+        json_body = {"links": [{"date": date_now, "url": link}]}
         self.__col.insert_one(json_body)
 
     def drop(self):
