@@ -53,7 +53,7 @@ export default function Card({
               sm={12}
               md={12}
             >
-              {product.Name}
+              {product.name}
             </Typography>
             <Typography
               gutterBottom

@@ -42,7 +42,7 @@ export default function ScrollDialog({
         aria-describedby="scroll-dialog-description"
       >
         <DialogTitle id="scroll-dialog-title">
-          {product?.Name ?? ''}
+          {product?.name ?? ''}
         </DialogTitle>
         <DialogContent>
           <img
@@ -70,7 +70,7 @@ export default function ScrollDialog({
               );
             }) ?? ''}
           </DialogContentText>
-          <Chart prices={product?.Prices ?? []} />
+          <Chart prices={product?.price ?? []} />
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Cancel</Button>

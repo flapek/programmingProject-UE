@@ -1,5 +1,5 @@
 import { Autocomplete, CircularProgress, TextField } from '@mui/material';
-import React from 'react';
+import React, { useState } from 'react';
 import mockedProducts from '../Data/mockedProducts';
 
 function sleep(delay = 0) {
@@ -9,10 +9,10 @@ function sleep(delay = 0) {
 }
 
 export default function SearchBar() {
-  const [open, setOpen] = React.useState(false);
-  const [options, setOptions] = React.useState<{ name: string }[]>([]);
+  const [open, setOpen] = useState(false);
+  const [options, setOptions] = useState<{ name: string }[]>([]);
   // const [value, setValue] = React.useState<string | null>(options[0]);
-  const [inputValue, setInputValue] = React.useState('');
+  const [inputValue, setInputValue] = useState('');
   const loading = open && options.length === 0;
 
   React.useEffect(() => {
@@ -28,7 +28,7 @@ export default function SearchBar() {
       if (active) {
         setOptions(
           mockedProducts.map((product) => ({
-            name: product.Name,
+            name: product.name,
           })),
         );
       }
@@ -93,14 +93,3 @@ export default function SearchBar() {
     />
   );
 }
-
-const products = [
-  { name: 'Asus ZenBook' },
-  { name: 'Lenovo Yoga' },
-  { name: 'Lenovo IdeaPad' },
-  { name: 'Lenovo ThinkPad' },
-  { name: 'Lenovo Legion' },
-  { name: 'HP Envy' },
-  { name: 'HP Spectre' },
-  { name: 'Dell G Series' },
-];
