@@ -5,6 +5,7 @@ import mockedProducts from '../Data/mockedProducts';
 import { Product } from '../Types';
 
 export default function Home() {
+  const [productsCopy, setProductsCopy] = useState<Product[]>([]);
   const [products, setProducts] = useState<Product[]>([]);
   const [product, setProduct] = useState<Product>(products[0]);
   const [page, setPage] = React.useState(0);
@@ -13,7 +14,33 @@ export default function Home() {
 
   useEffect(() => {
     setProducts(mockedProducts);
+    setProductsCopy(mockedProducts);
   }, []);
+
+  const search = (
+    value: (
+      | string
+      | {
+          name: string;
+        }
+    )[],
+  ) => {
+    if (value.length === 0) {
+      setProducts(productsCopy);
+      return;
+    }
+
+    const a: Product[] = [];
+
+    productsCopy.forEach((p) => {
+      value.forEach((v) => {
+        if (v === p.name) a.push(p);
+        else if ((v as { name: string }).name === p.name) a.push(p);
+      });
+    });
+
+    setProducts(a);
+  };
 
   const handleChangePage = (
     _: React.MouseEvent<HTMLButtonElement> | null,
@@ -44,7 +71,7 @@ export default function Home() {
         maxWidth={false}
         sx={{ display: 'flex', justifyContent: 'center' }}
       >
-        <SearchBar></SearchBar>
+        <SearchBar search={search} />
       </Container>
       <TablePagination
         component="div"

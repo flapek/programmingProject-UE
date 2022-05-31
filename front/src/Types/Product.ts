@@ -5,5 +5,5 @@ export default interface Product {
   gpu: string;
   image: string;
   price: Price[];
-  specification: Map<string, string>;
+  specification: Map<string, string[]>;
 }

@@ -48,13 +48,13 @@ const options = {
 };
 
 export default function Chart({ prices }: { prices: Price[] }) {
-  const labels = prices.map((price) => price.Data.getUTCDate().toString());
+  const labels = prices.map((price) => price.date.toDateString());
 
   const data = {
     labels,
     datasets: [
       {
-        data: prices.map((price) => price.Value),
+        data: prices.map((price) => price.value),
         borderColor: 'rgb(255, 99, 132)',
         backgroundColor: 'rgba(255, 99, 132, 0.5)',
       },

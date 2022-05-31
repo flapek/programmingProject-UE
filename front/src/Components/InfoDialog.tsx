@@ -48,14 +48,14 @@ export default function ScrollDialog({
           <img
             // sx={{ width: 200 }}
             style={{ width: 500 }}
-            src="https://cdn.x-kom.pl/i/setup/images/prod/big/product-new-big,,2021/7/pr_2021_7_8_8_14_34_922_00.jpg"
+            src={product?.image}
           ></img>
           <DialogContentText
             id="scroll-dialog-description"
             ref={descriptionElementRef}
             tabIndex={-1}
           >
-            {product?.Specification.forEach((value, key) => {
+            {product?.specification.forEach((value, key) => {
               const insideTable = (value: string[]) => {
                 return value.map((value, idx) => (
                   <Grid key={idx}>{value}</Grid>

@@ -18,12 +18,13 @@ export default function Card({
   product: Product;
   handleClickOpen: (product: Product) => void;
 }) {
-  const price = `Price: ${product.Prices.at(-1)
-    ?.Value.toString()
+  const price = `Price: ${product.price
+    .at(-1)
+    ?.value.toString()
     .replace('.', ',')} PLN`;
 
   const specification = () => {
-    return product.Specification.forEach((value, key) => (
+    return product.specification.forEach((value, key) => (
       <Grid key={key}>
         {key} | {value}
       </Grid>
@@ -41,7 +42,7 @@ export default function Card({
           component="img"
           alt="green iguana"
           sx={{ width: 200 }}
-          image="https://cdn.x-kom.pl/i/setup/images/prod/big/product-new-big,,2021/7/pr_2021_7_8_8_14_34_922_00.jpg"
+          image={product.image}
         />
         <CardContent component={Grid} container spacing={2}>
           <Grid container>
@@ -70,7 +71,7 @@ export default function Card({
           {/* <Grid container>{specification()}</Grid> */}
         </CardContent>
         <CardActions>
-          <Chart prices={product.Prices} />
+          <Chart prices={product.price} />
         </CardActions>
       </Button>
     </React.Fragment>

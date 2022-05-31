@@ -8,10 +8,20 @@ function sleep(delay = 0) {
   });
 }
 
-export default function SearchBar() {
+export default function SearchBar({
+  search,
+}: {
+  search: (
+    value: (
+      | string
+      | {
+          name: string;
+        }
+    )[],
+  ) => void;
+}) {
   const [open, setOpen] = useState(false);
   const [options, setOptions] = useState<{ name: string }[]>([]);
-  // const [value, setValue] = React.useState<string | null>(options[0]);
   const [inputValue, setInputValue] = useState('');
   const loading = open && options.length === 0;
 
@@ -56,10 +66,9 @@ export default function SearchBar() {
       onClose={() => {
         setOpen(false);
       }}
-      // value={value}
-      // onChange={(event, newValue: string | null) => {
-      //   setValue(newValue);
-      // }}
+      onChange={(_, value) => {
+        search(value);
+      }}
       inputValue={inputValue}
       onInputChange={(_, newInputValue) => {
         setInputValue(newInputValue);
