@@ -1,4 +1,4 @@
 export default interface Price {
-  Value: string;
-  Data: Date;
+  value: string;
+  date: Date;
 }
