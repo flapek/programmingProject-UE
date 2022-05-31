@@ -22,7 +22,7 @@ class MongoDb:
                     "value": product["price"],
                 }
             ],
-            "specyfication": [
+            "specification": [
                 {"ray_tracing": product["ray_tracing"]},
                 {"type_of_connector": product["type_of_connector"]},
                 {"memory": product["memory"]},
