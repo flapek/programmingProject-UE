@@ -31,6 +31,27 @@ export default function ScrollDialog({
     }
   }, [open]);
 
+  const specification = () => {
+    const elements: JSX.Element[] = [];
+    product?.specification.forEach((value, key) => {
+      const insideTable = (value: string[]) => {
+        return value.map((value, idx) => <Grid key={idx}>{value}</Grid>);
+      };
+
+      if (value !== undefined)
+        elements.push(
+          <Grid key={key} container>
+            <Grid item>{key}</Grid>
+            <Grid item sx={{ marginLeft: 1, marginRight: 1 }}>
+              |
+            </Grid>
+            <Grid item>{insideTable(value)}</Grid>
+          </Grid>,
+        );
+    });
+    return elements;
+  };
+
   return (
     <div>
       <Dialog
@@ -45,30 +66,13 @@ export default function ScrollDialog({
           {product?.name ?? ''}
         </DialogTitle>
         <DialogContent>
-          <img
-            // sx={{ width: 200 }}
-            style={{ width: 500 }}
-            src={product?.image}
-          ></img>
+          <img style={{ width: 500 }} src={product?.image}></img>
           <DialogContentText
             id="scroll-dialog-description"
             ref={descriptionElementRef}
             tabIndex={-1}
           >
-            {product?.specification.forEach((value, key) => {
-              const insideTable = (value: string[]) => {
-                return value.map((value, idx) => (
-                  <Grid key={idx}>{value}</Grid>
-                ));
-              };
-
-              return (
-                <Grid key={key} container>
-                  <Grid item>{key}</Grid>
-                  <Grid container>{insideTable(value)}</Grid>
-                </Grid>
-              );
-            }) ?? ''}
+            {specification()}
           </DialogContentText>
           <Chart prices={product?.price ?? []} />
         </DialogContent>

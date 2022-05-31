@@ -63,7 +63,7 @@ const mockedProducts: Product[] = [...new Array(images.length)].map(
       date: faker.date.soon(pIdx * 2, '2022-05-20T00:00:00.000Z'),
     })),
     specification: new Map<string, string[]>([
-      ['ray_tracing', ['ray_tracing']],
+      ['ray_tracing', ['ray_tracing', 'ray_tracing']],
       ['type_of_connector', ['type_of_connector']],
       ['memory', ['memory']],
       ['type_of_memory', ['type_of_memory']],

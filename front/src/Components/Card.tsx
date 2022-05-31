@@ -24,11 +24,16 @@ export default function Card({
     .replace('.', ',')} PLN`;
 
   const specification = () => {
-    return product.specification.forEach((value, key) => (
-      <Grid key={key}>
-        {key} | {value}
-      </Grid>
-    ));
+    const elements: JSX.Element[] = [];
+    product.specification.forEach((value, key) => {
+      if (value !== undefined)
+        elements.push(
+          <Grid key={key} item>
+            {key} | {value}
+          </Grid>,
+        );
+    });
+    return elements;
   };
 
   return (
@@ -68,7 +73,9 @@ export default function Card({
               {price}
             </Typography>
           </Grid>
-          {/* <Grid container>{specification()}</Grid> */}
+          {/* <Grid container sx={{ display: 'flex', flexDirection: 'column' }}>
+            {specification()}
+          </Grid> */}
         </CardContent>
         <CardActions>
           <Chart prices={product.price} />
