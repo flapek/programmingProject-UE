@@ -1,4 +1,4 @@
-import os, pika, json
+import pika, json
 from const import (
     QUEUE,
 )

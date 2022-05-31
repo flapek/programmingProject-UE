@@ -22,12 +22,6 @@ broker = Broker(
 )
 mongo = MongoDb()
 
-crawler_send(
-    str(os.getenv(SCRAPPER_BASE_URL)),
-    str(os.getenv(SCRAPPER_CATEGORY_URL)),
-    broker,
-)
-
 
 def broker_callback(ch, method, properties, body):
     print(" [x] Received %r" % json.loads(body))
@@ -38,9 +32,19 @@ def broker_callback(ch, method, properties, body):
 
 
 def main():
+    print("Init queue...")
     broker.init_queue()
+
+    print("Init consumers...")
     broker.init_consumers(broker_callback)
+
+    print("Start")
     broker.start()
+    crawler_send(
+        str(os.getenv(SCRAPPER_BASE_URL)),
+        str(os.getenv(SCRAPPER_CATEGORY_URL)),
+        broker,
+    )
 
 
 if __name__ == "__main__":
