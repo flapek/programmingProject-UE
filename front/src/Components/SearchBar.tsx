@@ -61,7 +61,7 @@ export default function SearchBar() {
       //   setValue(newValue);
       // }}
       inputValue={inputValue}
-      onInputChange={(event, newInputValue) => {
+      onInputChange={(_, newInputValue) => {
         setInputValue(newInputValue);
       }}
       multiple
