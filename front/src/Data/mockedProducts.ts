@@ -49,6 +49,9 @@ const images: string[] = [
   'https://cdn.x-kom.pl/i/setup/images/prod/big/product-new-big,,2021/5/pr_2021_5_5_8_36_15_590_05.jpg',
 ];
 
+const memory: string[] = ['2 GB', '4 GB', '6 GB', '8 GB'];
+const memoryType: string[] = ['GDDR5', 'GDDR6'];
+
 const mockedProducts: Product[] = [...new Array(images.length)].map(
   (_, idx) => ({
     name: names[idx],
@@ -63,25 +66,28 @@ const mockedProducts: Product[] = [...new Array(images.length)].map(
       date: faker.date.soon(pIdx * 2, '2022-05-20T00:00:00.000Z'),
     })),
     specification: new Map<string, string[]>([
-      ['ray_tracing', ['ray_tracing', 'ray_tracing']],
-      ['type_of_connector', ['type_of_connector']],
-      ['memory', ['memory']],
-      ['type_of_memory', ['type_of_memory']],
-      ['effective_memory_timing', ['effective_memory_timing']],
-      ['core_clock', ['core_clock']],
-      ['CUDA_cores', ['CUDA_cores']],
-      ['cooling_type', ['cooling_type']],
-      ['types_of_outputs', ['types_of_outputs']],
-      ['supported_libraries', ['supported_libraries']],
-      ['power_supply_connector', ['power_supply_connector']],
-      ['recommended_power_supply', ['recommended_power_supply']],
-      ['power_consumption', ['power_consumption']],
-      ['length', ['length']],
-      ['width', ['width']],
-      ['height', ['height']],
-      ['warranty', ['warranty']],
-      ['manufacturer_code', ['manufacturer_code']],
-      ['x-kom_code', ['x-kom_code']],
+      ['ray_tracing', []],
+      ['type_of_connector', []],
+      ['memory', [memory[faker.datatype.number(memory.length)]]],
+      [
+        'type_of_memory',
+        [memoryType[faker.datatype.number(memoryType.length)]],
+      ],
+      ['effective_memory_timing', []],
+      ['core_clock', []],
+      ['CUDA_cores', []],
+      ['cooling_type', []],
+      ['types_of_outputs', []],
+      ['supported_libraries', []],
+      ['power_supply_connector', []],
+      ['recommended_power_supply', []],
+      ['power_consumption', []],
+      ['length', []],
+      ['width', []],
+      ['height', []],
+      ['warranty', []],
+      ['manufacturer_code', []],
+      ['x-kom_code', []],
     ]),
   }),
 );

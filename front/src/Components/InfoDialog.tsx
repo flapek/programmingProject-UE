@@ -5,7 +5,7 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
-import { Grid, useMediaQuery, useTheme } from '@mui/material';
+import { Grid, Typography, useMediaQuery, useTheme } from '@mui/material';
 import { Product } from '../Types';
 import Chart from './Chart';
 
@@ -34,11 +34,7 @@ export default function ScrollDialog({
   const specification = () => {
     const elements: JSX.Element[] = [];
     product?.specification.forEach((value, key) => {
-      const insideTable = (value: string[]) => {
-        return value.map((value, idx) => <Grid key={idx}>{value}</Grid>);
-      };
-
-      if (value !== undefined)
+      if (value.length > 0)
         elements.push(
           <Grid key={key} container>
             <Grid item>{key}</Grid>
@@ -50,6 +46,10 @@ export default function ScrollDialog({
         );
     });
     return elements;
+  };
+
+  const insideTable = (value: string[]) => {
+    return value.map((value, idx) => <Grid key={idx}>{value}</Grid>);
   };
 
   return (
@@ -72,6 +72,7 @@ export default function ScrollDialog({
             ref={descriptionElementRef}
             tabIndex={-1}
           >
+            <Typography variant="h4">Specyfication</Typography>
             {specification()}
           </DialogContentText>
           <Chart prices={product?.price ?? []} />
